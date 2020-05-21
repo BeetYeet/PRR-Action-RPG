@@ -8,19 +8,29 @@ namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
+        public enum PortalIdentifier { A, B, C, D, E, F }
+
         public int portalToScene = 0;
+        public PortalIdentifier portalToIdentifier = PortalIdentifier.A;
         public Transform spawnpoint;
+        public PortalIdentifier identifier = PortalIdentifier.A;
+
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log("Portal Hit Something");
             if (other.tag == "Player")
             {
-                StartCoroutine(Transition());
+                TransitionSlider.instance.TransitionOut();
+                TransitionSlider.instance.OnTransitionedOut += OnTransitionedOut;
             }
         }
 
+        private void OnTransitionedOut()
+        {
+            StartCoroutine(Transition());
+        }
 
-        IEnumerator Transition()
+        private IEnumerator Transition()
         {
             DontDestroyOnLoad(gameObject);
             yield return SceneManager.LoadSceneAsync(portalToScene);
@@ -32,7 +42,7 @@ namespace RPG.SceneManagement
             Destroy(gameObject);
         }
 
-        void UpdatePlayer(Portal otherPortal)
+        private void UpdatePlayer(Portal otherPortal)
         {
             GameObject player = GameObject.FindWithTag("Player");
             Camera.main.transform.position += otherPortal.spawnpoint.position - player.transform.position;
@@ -40,14 +50,14 @@ namespace RPG.SceneManagement
             player.transform.rotation = otherPortal.transform.rotation;
         }
 
-
-        Portal GetOtherPortal()
+        private Portal GetOtherPortal()
         {
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this)
                     continue;
-                return portal;
+                if (portal.identifier == portalToIdentifier)
+                    return portal;
             }
             return null;
         }

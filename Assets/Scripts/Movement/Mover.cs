@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
+using RPG.Combat;
 
 namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
-        NavMeshAgent agent;
-        Animator anim;
-        Health health;
+        private NavMeshAgent agent;
+        private Animator anim;
+        private Health health;
         public float movementSpeed = 5.66f;
+        private float currentSpeed = 5.66f;
+
+        public bool attackIsAnimating = false;
 
         private void Start()
         {
@@ -20,24 +24,40 @@ namespace RPG.Movement
             health = GetComponent<Health>();
         }
 
-        void Update()
+        private void Update()
         {
             agent.enabled = health.Alive;
             UpdateAnimator();
+            if (attackIsAnimating)
+            {
+                agent.speed = currentSpeed / 2f;
+            }
+            else
+            {
+                agent.speed = currentSpeed;
+            }
         }
 
         public void StartMoveAction(Vector3 position, float speedFraction = 1f)
         {
+            if (attackIsAnimating)
+                return;
             if (GetComponent<Health>() != null && !GetComponent<Health>().Alive)
                 return;
-            GetComponent<ActionScheduler>().StartAction(this);
+            ActionScheduler actionScheduler = GetComponent<ActionScheduler>();
+            actionScheduler.CancelCurrentAction();
+            actionScheduler.StartAction(this);
             MoveTo(position, Mathf.Clamp01(speedFraction));
         }
 
         public void MoveTo(Vector3 posititon, float speedFraction)
         {
-            agent.speed = movementSpeed * Mathf.Clamp01(speedFraction);
-            agent.isStopped = false;
+            if (!health.Alive || attackIsAnimating)
+                return;
+            currentSpeed = movementSpeed * Mathf.Clamp01(speedFraction);
+            agent.speed = currentSpeed;
+            if (agent.isStopped)
+                agent.isStopped = false;
             agent.destination = posititon;
         }
 
@@ -52,7 +72,5 @@ namespace RPG.Movement
         {
             agent.isStopped = true;
         }
-
     }
-
 }

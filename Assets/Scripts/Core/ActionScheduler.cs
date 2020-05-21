@@ -4,28 +4,30 @@ using UnityEngine;
 
 namespace RPG.Core
 {
-	public class ActionScheduler : MonoBehaviour
-	{
-		IAction currentAction;
+    public class ActionScheduler : MonoBehaviour
+    {
+        private IAction currentAction;
 
-		public void StartAction(IAction action)
-		{
-			if (currentAction == action)
-			{
-				return;
-			}
+        public void StartAction(IAction action)
+        {
+            if (currentAction == action)
+            {
+                return;
+            }
 
-			if (currentAction != null)
-			{
-				CancelCurrentAction();
-			}
-			currentAction = action;
-		}
+            if (currentAction != null)
+            {
+                CancelCurrentAction();
+            }
+            currentAction = action;
+        }
 
-
-		public void CancelCurrentAction(){
-			currentAction.Cancel();
-			currentAction = null;
-		}
-	}
+        public void CancelCurrentAction()
+        {
+            if (currentAction == null)
+                return;
+            currentAction.Cancel();
+            currentAction = null;
+        }
+    }
 }

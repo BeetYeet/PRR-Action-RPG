@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7013563431435050424, guid: f1d5903850dfad74782ae6e0a4484912,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Boss Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8804703725030308458, guid: f1d5903850dfad74782ae6e0a4484912,
         type: 3}
@@ -66,6 +66,132 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804703725030308458, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804703725030308458, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804703725030308458, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: lazyTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: becomeAlertTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: becomeSuspiciousTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: alertDecayTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: chaseDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611206, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: dropChaseDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802453065662536158, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7808154177823192558, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328929844081561355, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 656529506960720228, guid: f1d5903850dfad74782ae6e0a4484912,
+        type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 761776a0b9c763a4299fee74a310d915,
+        type: 2}
+    - target: {fileID: 424611197, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: health
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611197, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: reviveHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611197, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 424611197, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}
+      propertyPath: defaultHealth
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1d5903850dfad74782ae6e0a4484912, type: 3}

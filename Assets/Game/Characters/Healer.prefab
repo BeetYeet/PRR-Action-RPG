@@ -30,6 +30,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 1000
   dropChaseDistance: 10000000
+  lazyTime: 20
+  becomeAlertTime: 1
+  becomeSuspiciousTime: 1
+  alertDecayTime: 20
+  suspiciousDecayTime: 5
+  pathParent: {fileID: 0}
+  basePosition: {x: 0, y: 0, z: 0}
+  waypointStayTime: 1
 --- !u!1001 &3459624392543153567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,11 +105,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9210369203449719495, guid: c22237b9715e78340b93746e99266917,
-        type: 3}
-      propertyPath: alignment
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4090162338421261922, guid: c22237b9715e78340b93746e99266917,
         type: 3}
       propertyPath: attackRotationSpeed
@@ -127,10 +130,32 @@ PrefabInstance:
       propertyPath: damage
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 4090162338421261922, guid: c22237b9715e78340b93746e99266917,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: bc1a32ff1c57f73428f95a0ddc86f1ab,
+        type: 2}
+    - target: {fileID: 4090162338421261922, guid: c22237b9715e78340b93746e99266917,
+        type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a89269a41015e547b571e3efaaa4579,
+        type: 2}
+    - target: {fileID: 4090162338421261922, guid: c22237b9715e78340b93746e99266917,
+        type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1565149820495060405, guid: c22237b9715e78340b93746e99266917,
         type: 3}
       propertyPath: m_Speed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210369203449719495, guid: c22237b9715e78340b93746e99266917,
+        type: 3}
+      propertyPath: alignment
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3772531071687538109, guid: c22237b9715e78340b93746e99266917,
         type: 3}

@@ -8,12 +8,12 @@ namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chaseDistance = 5f;
-        [SerializeField] float dropChaseDistance = 10f;
-        Fighter fighter;
-        GameObject player;
-        Mover mover;
-        float alertness = 1.99f;
+        [SerializeField] private float chaseDistance = 5f;
+        [SerializeField] private float dropChaseDistance = 10f;
+        private Fighter fighter;
+        private GameObject player;
+        private Mover mover;
+        private float alertness = 1.99f;
         public float lazyTime = 20f;
         public float becomeAlertTime = 1f;
         public float becomeSuspiciousTime = 1f;
@@ -21,15 +21,21 @@ namespace RPG.Control
         public float suspiciousDecayTime = 5f;
         public Transform pathParent;
         public Vector3 basePosition;
-        int targetWaypoint = 0;
-        bool atNextWaypoint = false;
+        private int targetWaypoint = 0;
+        private bool atNextWaypoint = false;
         public float waypointStayTime = 1f;
-
 
         private void Start()
         {
             fighter = GetComponent<Fighter>();
             mover = GetComponent<Mover>();
+
+            Health health = GetComponent<Health>();
+            if (health != null)
+            {
+                health.OnDamaged += () => alertness = 4f;
+            }
+
             player = GameObject.FindWithTag("Player");
             if (pathParent != null)
                 if (pathParent.childCount != 0f)
@@ -42,25 +48,23 @@ namespace RPG.Control
             targetWaypoint = GetClosestPoint();
         }
 
-
-
-        bool PlayerIsInRange()
+        private bool PlayerIsInRange()
         {
             return DistanceToPlayer() < GetSearchRange();
         }
 
-        float DistanceToPlayer()
+        private float DistanceToPlayer()
         {
             return Vector3.Distance(player.transform.position, transform.position);
         }
 
-        void Update()
+        private void Update()
         {
             CalculateState();
             UpdatePath();
         }
 
-        int GetClosestPoint()
+        private int GetClosestPoint()
         {
             if (pathParent == null)
                 return 0;
@@ -99,15 +103,14 @@ namespace RPG.Control
                 Invoke("NextWaypoint", waypointStayTime);
             }
             Pathe();
-
         }
 
-        void PatheToBase()
+        private void PatheToBase()
         {
             mover.MoveTo(basePosition, 0.5f);
         }
 
-        void NextWaypoint()
+        private void NextWaypoint()
         {
             atNextWaypoint = false;
             targetWaypoint++;
@@ -115,13 +118,12 @@ namespace RPG.Control
                 targetWaypoint = 0;
         }
 
-        void Pathe()
+        private void Pathe()
         {
             mover.MoveTo(GetNextPoint(), 0.5f);
         }
 
-
-        Vector3 GetNextPoint()
+        private Vector3 GetNextPoint()
         {
             try
             {
@@ -139,8 +141,10 @@ namespace RPG.Control
             {
                 default:
                     return 0.4f;
+
                 case AlertState.Chasing:
                     return 1f;
+
                 case AlertState.Suspicious:
                     return 0.65f;
             }
@@ -160,6 +164,7 @@ namespace RPG.Control
                         alertness -= Time.deltaTime / lazyTime;
                     }
                     break;
+
                 case AlertState.Alert:
                     if (PlayerIsInRange())
                     {
@@ -170,6 +175,7 @@ namespace RPG.Control
                         alertness -= Time.deltaTime / alertDecayTime;
                     }
                     break;
+
                 case AlertState.Suspicious:
                     if (PlayerIsInRange())
                     {
@@ -182,6 +188,7 @@ namespace RPG.Control
                             targetWaypoint = GetClosestPoint();
                     }
                     break;
+
                 case AlertState.Chasing:
                     if (!PlayerIsInRange())
                     {
@@ -225,7 +232,7 @@ namespace RPG.Control
             }
         }
 
-        void DrawAlert()
+        private void DrawAlert()
         {
             float range = GetSearchRange();
             switch (GetAlertness())
@@ -233,12 +240,15 @@ namespace RPG.Control
                 default:
                     Gizmos.color = Color.green;
                     break;
+
                 case AlertState.Alert:
                     Gizmos.color = Color.blue;
                     break;
+
                 case AlertState.Suspicious:
                     Gizmos.color = Color.Lerp(Color.red, Color.blue, 0.5f);
                     break;
+
                 case AlertState.Chasing:
                     Gizmos.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
                     break;
@@ -246,23 +256,25 @@ namespace RPG.Control
             Gizmos.DrawWireSphere(transform.position, range);
         }
 
-        float GetSearchRange()
+        private float GetSearchRange()
         {
             switch (GetAlertness())
             {
                 default:
                     return chaseDistance * .75f;
+
                 case AlertState.Alert:
                     return chaseDistance;
+
                 case AlertState.Suspicious:
                     return chaseDistance * 1.5f;
+
                 case AlertState.Chasing:
                     return dropChaseDistance;
             }
         }
 
-
-        enum AlertState
+        private enum AlertState
         {
             Aware, Alert, Suspicious, Chasing
         }
